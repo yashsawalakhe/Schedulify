@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Schedulify — Dashboard</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .blue-glow {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      filter: blur(80px);
+      background: radial-gradient(circle at center, rgba(30,144,255,0.25), transparent 50%);
+      opacity: 0.5;
+      z-index: -1;
+      border-radius: 50%;
+    }
+
+    .monogram {
+      width: 60px;
+      height: 60px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Blue glow -->
+  <div class="blue-glow" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header class="flex items-center justify-between px-8 py-4 border-b border-white/10 relative z-20">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <div class="monogram">SF</div>
+      <h1 class="text-xl font-bold tracking-wide">Schedulify</h1>
+    </div>
+
+    <!-- Nav Links -->
+    <nav class="flex items-center gap-6 text-gray-300 text-sm relative">
+      <a href="dashboard.html" class="hover:text-white">Dashboard</a>
+      <a href="kitab.html" class="hover:text-white">Kitab</a>
+      <a href="planner.html" class="hover:text-white">Your Planning</a>
+
+      <!-- Profile Dropdown -->
+      <div class="relative">
+        <button id="profileBtn" class="hover:text-white flex items-center gap-1">Profile ▾</button>
+        <div id="profileMenu" class="absolute hidden bg-black/90 mt-2 rounded-md shadow-lg min-w-[150px] py-2 right-0">
+          <a href="profile.html" class="block px-4 py-2 hover:bg-gray-800">View Profile</a>
+          <a href="settings.html" class="block px-4 py-2 hover:bg-gray-800">Settings</a>
+        </div>
+      </div>
+
+      <button onclick="logout()" class="px-4 py-2 bg-black text-white border border-gray-700 rounded-md hover:bg-gray-800 transition">Logout</button>
+    </nav>
+  </header>
+
+  <!-- Main Dashboard -->
+  <main class="flex-grow px-6 md:px-12 py-10 space-y-10">
+
+    <!-- Welcome Section -->
+    <section class="text-center">
+      <h2 class="text-3xl font-bold mb-2">HELLO, <span class="text-blue-400">LEARNER!</span></h2>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass p-6 rounded-lg text-center hover:scale-[1.02] transition">
+        <h4 class="font-semibold text-lg mb-2">Generate Plan</h4>
+        <p class="text-gray-400 mb-3">Let Schedulify auto-build your study plan.</p>
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Generate</button>
+      </div>
+
+      <div class="glass p-6 rounded-lg text-center hover:scale-[1.02] transition">
+        <h4 class="font-semibold text-lg mb-2">Download PDF</h4>
+        <p class="text-gray-400 mb-3">Export your current schedule as a file.</p>
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Download</button>
+      </div>
+
+      <div class="glass p-6 rounded-lg text-center hover:scale-[1.02] transition">
+        <h4 class="font-semibold text-lg mb-2">Your Planning</h4>
+        <p class="text-gray-400 mb-3">View and manage your personalized plan.</p>
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="window.location.href='planner.html'">Open</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 text-center text-gray-400 py-4 text-sm">
+    © Schedulify 2025 — Designed by Yash Sawalakhe
+  </footer>
+
+  <script>
+    // Profile dropdown toggle
+    const profileBtn = document.getElementById('profileBtn');
+    const profileMenu = document.getElementById('profileMenu');
+    profileBtn.addEventListener('click', () => {
+      profileMenu.classList.toggle('hidden');
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!profileBtn.contains(event.target) && !profileMenu.contains(event.target)) {
+        profileMenu.classList.add('hidden');
+      }
+    });
+
+    // Logout
+    function logout() {
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
